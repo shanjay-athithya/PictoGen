@@ -2,10 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import PictogramCard from "./components/PictogramCard";
 import SpeechToTextMic from "./components/SpeechToTextMic";
+import { simplifyTranscript } from "./components/simplifyTranscript";
 import "./App.css";
 
 export default function App() {
   const [input, setInput] = useState("");
+  const [simplifiedText, setSimplifiedText] = useState("");
+  const [showSimplified, setShowSimplified] = useState(true);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -13,10 +16,13 @@ export default function App() {
     const textToSend = customText || input;
     if (!textToSend.trim()) return;
 
+    const simplified = simplifyTranscript(textToSend);
+    setSimplifiedText(simplified);
+
     setLoading(true);
     try {
       const { data } = await axios.post("http://localhost:8000/simplify", {
-        text: textToSend,
+        text: simplified,
       });
 
       const pictograms = await Promise.all(
@@ -57,6 +63,26 @@ export default function App() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
+
+        <div className="toggle-container">
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={showSimplified}
+              onChange={() => setShowSimplified(!showSimplified)}
+            />
+            <span className="slider"></span>
+          </label>
+          <span className="toggle-label">
+            {showSimplified ? "Simplified View" : "Original View"}
+          </span>
+        </div>
+
+        {simplifiedText && (
+          <div className="preview-sentence">
+            <strong>Preview:</strong> {showSimplified ? simplifiedText : input}
+          </div>
+        )}
 
         <button
           onClick={() => fetchSimplified()}
