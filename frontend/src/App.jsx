@@ -29,6 +29,11 @@ export default function App() {
       { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }
     );
   }, []);
+  useEffect(() => {
+    setInput("");
+    setSimplifiedText("");
+    setResult(null);
+  }, [mode]);
 
   const fetchSimplified = async (customText) => {
     const textToSend = customText || input;
