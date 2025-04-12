@@ -1,5 +1,4 @@
-// App.jsx
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { simplifyTranscript } from "./components/simplifyTranscript";
 import PictogramCard from "./components/pictogram/PictogramCard";
@@ -7,7 +6,11 @@ import SpeechToTextMic from "./components/speech_to_text/SpeechToTextMic";
 import ImageCaptioner from "./components/image-captioner/ImageCaptioner";
 import Navbar from "./components/navbar/Navbar";
 import { AnimatePresence, motion } from "framer-motion";
+import gsap from "gsap";
+import ThreeBackground from "./components/ThreeBackground";
 import "./App.css";
+import girlIcon from "./assets/girl.png";
+import boyIcon from "./assets/boy.png";
 
 export default function App() {
   const [input, setInput] = useState("");
@@ -16,6 +19,16 @@ export default function App() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState("text");
+
+  const containerRef = useRef();
+
+  useEffect(() => {
+    gsap.fromTo(
+      containerRef.current,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }
+    );
+  }, []);
 
   const fetchSimplified = async (customText) => {
     const textToSend = customText || input;
@@ -54,110 +67,117 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-ghibliYellow via-ghibliBlue to-white px-4 py-8 font-sans">
-      <div className="flex flex-col lg:flex-row justify-center gap-10">
-        <AnimatePresence mode="wait">
-          {true && ( // conditionally render based on app logic if needed
-            <Navbar setMode={setMode} key="navbar" />
-          )}
-        </AnimatePresence>
-        <motion.div
-          className="flex-1 max-w-3xl bg-white/90 backdrop-blur-md shadow-2xl rounded-3xl p-8 border border-ghibliPink"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <h1 className="text-4xl font-bold text-center text-ghibliBlue mb-4 drop-shadow">
-            🌿 Pictogram Generator
-          </h1>
-
+    <div className="min-h-screen bg-black text-white relative overflow-hidden font-sans">
+      <ThreeBackground />
+      <div
+        ref={containerRef}
+        className="relative z-10 min-h-screen px-4 py-8 font-sans"
+      >
+        <div className="flex flex-col lg:flex-row justify-center gap-10">
           <AnimatePresence mode="wait">
-            {mode === "text" && (
-              <motion.div
-                key="text"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="text-mode-container"
-              >
-                <textarea
-                  className="text-input-box"
-                  rows={4}
-                  placeholder="Type your sentence to generate pictograms..."
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                />
-
-                <button
-                  onClick={() => fetchSimplified()}
-                  disabled={loading}
-                  className="generate-btn"
-                >
-                  {loading ? "Processing..." : "✨ Generate Pictograms"}
-                </button>
-              </motion.div>
-            )}
-
-            {mode === "speech" && (
-              <motion.div
-                key="speech"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-              >
-                <SpeechToTextMic onResult={handleSpeechResult} />
-              </motion.div>
-            )}
-
-            {mode === "image" && (
-              <motion.div
-                key="image"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-              >
-                <ImageCaptioner
-                  onResult={setResult}
-                  setSimplifiedText={setSimplifiedText}
-                  setLoading={setLoading}
-                />
-              </motion.div>
-            )}
+            <Navbar setMode={setMode} currentMode={mode} />
           </AnimatePresence>
+          <div className="mt-14">
+            <motion.div
+              className="w-full max-w-xl bg-white/20 backdrop-blur-md shadow-2xl rounded-3xl p-6 border border-white border-opacity-30"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 10 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h1 className="text-4xl font-bold text-center text-white mb-4 drop-shadow">
+                🌿 Pictogram Generator
+              </h1>
 
-          {simplifiedText && (
-            <>
-              <div className="toggle-wrapper">
-                <label
-                  className="switch"
-                  title="Toggle simplified/original text"
-                >
-                  <input
-                    type="checkbox"
-                    checked={showSimplified}
-                    onChange={() => setShowSimplified(!showSimplified)}
-                  />
-                  <span className="slider round"></span>
-                </label>
-              </div>
+              <AnimatePresence mode="wait">
+                {mode === "text" && (
+                  <motion.div
+                    key="text"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                  >
+                    <textarea
+                      className="text-input-box"
+                      rows={4}
+                      placeholder="Type your sentence to generate pictograms..."
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                    />
+                    <button
+                      onClick={() => fetchSimplified()}
+                      disabled={loading}
+                      className="generate-btn"
+                    >
+                      {loading ? "Processing..." : "✨ Generate Pictograms"}
+                    </button>
+                  </motion.div>
+                )}
 
-              <div className="preview-text">
-                <strong>Preview:</strong>{" "}
-                {showSimplified ? simplifiedText : input}
-              </div>
-            </>
-          )}
+                {mode === "speech" && (
+                  <motion.div
+                    key="speech"
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                  >
+                    <SpeechToTextMic onResult={handleSpeechResult} />
+                  </motion.div>
+                )}
 
-          {result && (
-            <motion.div layout>
-              <div className="pictogram-gallery">
-                {result?.pictograms.map(({ word, image }, index) => (
-                  <PictogramCard key={index} word={word} image={image} />
-                ))}
-              </div>
+                {mode === "image" && (
+                  <motion.div
+                    key="image"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                  >
+                    <ImageCaptioner
+                      onResult={setResult}
+                      setSimplifiedText={setSimplifiedText}
+                      setLoading={setLoading}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {simplifiedText && (
+                <>
+                  <div className="toggle-wrapper">
+                    <label
+                      className="switch"
+                      title="Toggle simplified/original text"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={showSimplified}
+                        onChange={() => setShowSimplified(!showSimplified)}
+                      />
+                      <span className="slider round"></span>
+                    </label>
+                  </div>
+
+                  <div className="preview-text">
+                    <strong>Preview:</strong>{" "}
+                    {showSimplified ? simplifiedText : input}
+                  </div>
+                </>
+              )}
+
+              {result && (
+                <motion.div layout>
+                  <div className="pictogram-gallery">
+                    {result?.pictograms.map(({ word, image }, index) => (
+                      <PictogramCard key={index} word={word} image={image} />
+                    ))}
+                  </div>
+                </motion.div>
+              )}
             </motion.div>
-          )}
-        </motion.div>
+          </div>
+        </div>
+        <img src={boyIcon} alt="Right Icon" className="boy-icon" />
+
+        <img src={girlIcon} alt="Left Icon" className="girl-icon" />
       </div>
     </div>
   );

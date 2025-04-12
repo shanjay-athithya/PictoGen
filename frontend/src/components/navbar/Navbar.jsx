@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import "./Navbar.css";
 
 const navItems = [
-  { label: "Text ➝ Pictograms", value: "text", emoji: "💬" },
-  { label: "Image ➝ Caption ➝ Pictograms", value: "image", emoji: "🖼️" },
-  { label: "Speech ➝ Caption ➝ Pictograms", value: "speech", emoji: "🎤" },
+  { label: "Text", value: "text", emoji: "💬" },
+  { label: "Image", value: "image", emoji: "🖼️" },
+  { label: "Speech", value: "speech", emoji: "🎤" },
 ];
 
 const navbarVariants = {

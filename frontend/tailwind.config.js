@@ -1,5 +1,6 @@
-module.exports = {
-  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"], // adjust as needed
+// tailwind.config.js
+export default {
+  content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {

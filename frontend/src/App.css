@@ -342,3 +342,72 @@ input:checked+.slider:before {
   backdrop-filter: blur(6px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
+
+
+.text-input-box {
+  @apply w-full p-4 rounded-xl bg-white bg-opacity-80 text-gray-800 shadow-lg;
+}
+
+.generate-btn {
+  @apply mt-4 bg-gradient-to-r from-pink-400 via-red-400 to-yellow-300 text-white font-bold py-2 px-6 rounded-full hover:scale-105 transform transition-all duration-300 shadow-md;
+}
+
+.pictogram-gallery {
+  @apply grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6;
+}
+
+.toggle-wrapper {
+  @apply flex justify-end items-center mt-4;
+}
+
+.preview-text {
+  @apply mt-2 text-gray-700 text-center;
+}
+
+.boy-icon {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  width: 360px;
+  height: 360px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.2));
+  animation: float-reverse 4s ease-in-out infinite;
+  z-index: 10;
+}
+
+.girl-icon {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  width: 360px;
+  height: 360px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.2));
+  animation: float 4s ease-in-out infinite;
+  z-index: 10;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes float-reverse {
+
+  0%,
+  100% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(0px);
+  }
+}

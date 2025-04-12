@@ -1,45 +1,67 @@
-/* Navbar.css */
-
 .navbar-modern {
-  width: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(200, 200, 200, 0.5);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  gap: 12px;
+  padding: 12px 24px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  transition: all 0.3s ease-in-out;
+  animation: fadeInCenter 0.5s ease-out;
 }
 
+@keyframes fadeInCenter {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+}
+
+
 .nav-modern-btn {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(230, 230, 230, 0.7);
+  padding: 10px 18px;
   border-radius: 999px;
-  padding: 10px 20px;
-  margin: 0 8px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
-  color: #333;
   display: flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  color: #ffffff;
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
   cursor: pointer;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .nav-modern-btn:hover {
-  background: #f0f0f0;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+  color: #0f172a;
+  transform: scale(1.04);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
 }
 
-.nav-modern-btn:focus {
-  outline: none;
+.active-nav-btn {
+  background: linear-gradient(to right, #8EC5FC, #E0C3FC);
+  color: #0f172a;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 0 8px rgba(147, 197, 253, 0.4),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  transform: scale(1.08);
 }
 
 .emoji {
@@ -47,19 +69,6 @@
 }
 
 .label {
+  font-family: "Poppins", sans-serif;
   white-space: nowrap;
-}
-
-
-.active-nav-btn {
-  background: linear-gradient(135deg, #e0ecff, #fcefe6);
-  border: 2px solid #60a5fa;
-  color: #111827;
-  font-weight: 600;
-  box-shadow: 0 0 0 3px rgba(147, 197, 253, 0.25);
-  transform: scale(1.03);
-}
-
-.active-nav-btn::before {
-  display: none;
 }
