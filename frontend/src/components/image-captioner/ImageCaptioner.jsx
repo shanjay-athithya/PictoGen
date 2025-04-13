@@ -1,7 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 import { simplifyTranscript } from "../simplifyTranscript";
-import "./ImageCaptioner.css";
 
 export default function ImageCaptioner({
   onResult,
@@ -90,37 +89,45 @@ export default function ImageCaptioner({
 
   return (
     <div
-      className={`image-captioner-container ${dragActive ? "drag-active" : ""}`}
+      className={`mt-8 px-4 sm:px-8 max-w-4xl mx-auto py-6 border-2 border-dashed rounded-lg transition-all duration-200 ${
+        dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300 bg-black"
+      }`}
       onDrop={handleDrop}
       onDragOver={handleDrag}
       onDragEnter={handleDrag}
       onDragLeave={() => setDragActive(false)}
     >
-      <h2 className="image-captioner-title">🖼️ Upload or Drag an Image</h2>
+      <h2 className="text-xl sm:text-2xl font-semibold text-center mb-4">
+        🖼️ Upload or Drag an Image
+      </h2>
       <input
         type="file"
         accept="image/*"
         onChange={handleFileInput}
-        className="image-captioner-input"
+        className="block w-full text-sm text-gray-700 mb-6 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-500 file:text-white hover:file:bg-blue-700"
       />
 
       {uploading && (
-        <div className="loading-container">
-          <div className="spinner"></div>
-          <div className="progress-bar">
+        <div className="flex flex-col items-center gap-4">
+          <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
+          <div className="w-full bg-gray-200 h-2 rounded">
             <div
-              className="progress-fill"
+              className="bg-red-500 h-2 rounded"
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <p className="progress-label">{progress}%</p>
+          <p className="text-sm text-gray-600">{progress}%</p>
         </div>
       )}
 
       {imagePreview && !uploading && (
-        <div className="image-preview-wrapper">
-          <img src={imagePreview} alt="Preview" className="image-preview" />
-          <p className="image-caption">
+        <div className="mt-6 text-center">
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className="max-w-full mx-auto rounded-lg shadow-md"
+          />
+          <p className="mt-4 text-sm text-gray-700">
             <strong>Caption:</strong> {imageCaption}
           </p>
         </div>

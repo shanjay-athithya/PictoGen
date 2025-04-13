@@ -133,7 +133,7 @@ const SpeechToTextMic = ({ onResult }) => {
     ctx.fill();
 
     // Optional: add stroke for definition
-    ctx.strokeStyle = "#007bff";
+    ctx.strokeStyle = "#dc3545";
     ctx.lineWidth = 3;
     ctx.stroke();
   };
