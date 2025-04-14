@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+nltk
+requests
+tensorflow
+Pillow
+numpy
+keras
+python-multipart
