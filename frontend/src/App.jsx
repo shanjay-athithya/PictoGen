@@ -100,7 +100,7 @@ export default function App() {
       <div className="fixed top-0 left-0 w-full flex justify-between items-center p-4 bg-black backdrop-blur-md border-b border-white/20 z-30">
         <div className="flex items-center gap-3">
           <img
-            src={user.image}
+            src={"https://ik.imagekit.io/hmx3cjrmq/PictoGen.png?updatedAt=1744651159195"}
             alt="user"
             className="w-10 h-10 rounded-full border border-white/30"
           />
