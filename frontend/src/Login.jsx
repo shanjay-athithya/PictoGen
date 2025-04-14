@@ -1,3 +1,7 @@
+import React from "react";
+import { auth, provider } from "./firebase";
+import { signInWithPopup } from "firebase/auth";
+
 export default function Login() {
   const handleLogin = async () => {
     try {
@@ -6,6 +10,8 @@ export default function Login() {
       console.error("Login failed", err);
     }
   };
+
+
 
   return (
     <div className="flex flex-col md:flex-row bg-black h-screen">
