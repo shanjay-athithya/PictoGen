@@ -10,9 +10,9 @@ export default function Login() {
   return (
     <div className="flex flex-col md:flex-row bg-black h-screen">
       {/* Left Side - Image */}
-      <div className="w-full mt-0 md:w-1/2 h-3/5 md:h-auto order-1 md:order-none">
+      <div className="w-full mt-0 md:w-1/2 h-2/3 md:h-auto order-1 md:order-none">
         <img
-          src="https://ik.imagekit.io/hmx3cjrmq/image.png?updatedAt=1744540888367"
+          src="https://ik.imagekit.io/hmx3cjrmq/image.png"
           alt="PictoGen"
           className="w-full h-full object-cover"
         />
