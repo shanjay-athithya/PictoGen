@@ -54,13 +54,13 @@ export default function App() {
     setLoading(true);
 
     try {
-      const { data } = await axios.post("http://localhost:8000/simplify", {
+      const { data } = await axios.post("https://pictgen1.onrender.com/simplify", {
         text: simplified,
       });
 
       const pictograms = await Promise.all(
         data.simplified.map(async (word) => {
-          const res = await axios.get(`http://localhost:8000/pictogram/${word}`);
+          const res = await axios.get(`https://pictgen1.onrender.com/pictogram/${word}`);
           return { word, image: res.data.image_url };
         })
       );
