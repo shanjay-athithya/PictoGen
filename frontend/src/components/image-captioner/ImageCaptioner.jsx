@@ -26,7 +26,7 @@ export default function ImageCaptioner({
     formData.append("file", file);
 
     try {
-      const res = await fetch("http://localhost:8001/caption", {
+      const res = await fetch("https://pictgen.onrender.com/caption", {
         method: "POST",
         body: formData,
       });
@@ -38,7 +38,7 @@ export default function ImageCaptioner({
       setSimplifiedText(simplified);
 
       const response = await axios.post(
-        "http://localhost:8000/simplify",
+        "https://pictgen1.onrender.com/simplify",
         {
           text: simplified,
         },
@@ -53,7 +53,7 @@ export default function ImageCaptioner({
       const pictograms = await Promise.all(
         response.data.simplified.map(async (word) => {
           const res = await axios.get(
-            `http://localhost:8000/pictogram/${word}`
+            `https://pictgen1.onrender.com/pictogram/${word}`
           );
           return { word, image: res.data.image_url };
         })
