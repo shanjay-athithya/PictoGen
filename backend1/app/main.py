@@ -63,7 +63,10 @@ def define_model(vocab_size, max_length):
     return model
 
 model = define_model(vocab_size, max_length)
-model.load_weights("app/model_7.h5")
+MODEL_PATH = os.path.join(BASE_DIR, "model_7.h5")
+
+model.load_weights(MODEL_PATH)
+#model.load_weights("app/model_7.h5")
 print("✅ model_7.h5 weights loaded")
 
 # === Core captioning logic ===
