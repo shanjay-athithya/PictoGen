@@ -10,6 +10,18 @@ from keras.models import Model
 from keras.layers import Input, Dense, LSTM, Embedding, Dropout, add
 from keras.preprocessing.sequence import pad_sequences
 from keras.applications.xception import Xception
+import os
+import pickle
+
+# Get absolute path to current directory (where main.py is)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Build full path to tokenizer.p
+tokenizer_path = os.path.join(BASE_DIR, "tokenizer.p")
+
+# Load tokenizer
+with open(tokenizer_path, "rb") as f:
+    tokenizer = pickle.load(f)
 
 # === FastAPI setup ===
 app = FastAPI()
@@ -24,7 +36,7 @@ app.add_middleware(
 
 # === Load assets ===
 print("🔄 Loading tokenizer...")
-tokenizer = pickle.load(open("app/tokenizer.p", "rb"))
+#tokenizer = pickle.load(open("app/tokenizer.p", "rb"))
 vocab_size = len(tokenizer.word_index) + 1
 max_length = 32
 
