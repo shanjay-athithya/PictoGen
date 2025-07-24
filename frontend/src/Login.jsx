@@ -18,7 +18,7 @@ export default function Login() {
       {/* Left Side - Image */}
       <div className="w-full mt-0 md:w-1/2 h-2/3 md:h-auto order-1 md:order-none">
         <img
-          src="https://ik.imagekit.io/hmx3cjrmq/image.png"
+          src="https://ik.imagekit.io/hmx3cjrmq/image(1).png?updatedAt=1753326653023"
           alt="PictoGen"
           className="w-full h-full object-cover"
         />
