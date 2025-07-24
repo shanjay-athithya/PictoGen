@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local env files
+.env
+.env.local
+.env.*.local
+
+# IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Vercel
+.vercel/
+
+# Firebase (optional: if you have local emulator or cache)
+.firebase/
+firestore-debug.log
+firebase-debug.log
+
+# Mac and Linux files
+*.swp
+*.lock
